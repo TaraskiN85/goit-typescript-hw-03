@@ -1,17 +1,12 @@
-interface IKey {
-  signature: number;
-  getSignature: () => void;
-}
-
-class Key implements IKey {
-  signature: number;
+class Key {
+  private signature: number;
 
   constructor() {
-    this.signature = this.getSignature()
+    this.signature = Number(Math.random().toFixed(6))*1000000
   }
   
   getSignature = () => {
-    return Math.random()
+    return this.signature
   }
 }
 
@@ -57,7 +52,7 @@ class MyHouse extends House {
   }
 
   openDoor(key: Key): void {
-    if (key.signature === this.key.getSignature()) {
+    if (key.getSignature() === this.key.getSignature()) {
       this.door = true;
       console.log("Door is opened");
     } else {
